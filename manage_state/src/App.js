@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './App.css';
 
 export default function App() {
   const [giftCard, setGiftCard] = useState(
@@ -12,30 +13,41 @@ export default function App() {
   );
 
   function spendGiftCard() {
-
+    setGiftCard(prevState => {
+      return ({
+        ...prevState,
+        text: "Your coupon has been used.",
+        valid: false,
+        instructions: "Please visit our restaurant to renew your gift card."
+      });
+    });
   }
 
   return (
-    <div style={{padding: '40px'}}>
-      <h1>
-        Gift Card Page
-      </h1>
-      <h2>
-        Customer: {giftCard.firstName} {giftCard.lastName}
-      </h2>
-      <h3>
-        {giftCard.text}
-      </h3>
-      <p>
-        {giftCard.instructions}
-      </p>
-      {
-        giftCard.valid && (
-          <button onClick={spendGiftCard}>
-            Spend Gift Card
-          </button>
-        )
-      }
+    <div className="App">
+      <header className="App-header">
+        <div className="App-header">
+          <h1>
+            Gift Card Page
+          </h1>
+          <h2>
+            Customer: {giftCard.firstName} {giftCard.lastName}
+          </h2>
+          <h3>
+            {giftCard.text}
+          </h3>
+          <p>
+            {giftCard.instructions}
+          </p>
+          {
+            giftCard.valid && (
+              <button onClick={spendGiftCard}>
+                Spend Gift Card
+              </button>
+            )
+          }
+        </div>
+      </header>
     </div>
   );
 }
